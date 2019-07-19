@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <title>JS Drum Kit</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto|Russo+One&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="keys">
@@ -68,20 +72,20 @@
         if (!audio) return; // stop function from running all together
         audio.currentTime = 0; // rewind to start
         audio.play();
-        key.classList.add('playing');
+        key.classList.add("playing");
       }
 
       function removeTransition(currentKey) {
-        if (currentKey.propertyName !== 'transform') return; // skip it if it's not a transform
-        this.classList.remove('playing');
+        if (currentKey.propertyName !== "transform") return; // skip it if it's not a transform
+        this.classList.remove("playing");
       }
 
-      const keys = document.querySelectorAll('.key');
+      const keys = document.querySelectorAll(".key");
       console.log(keys);
       keys.forEach(key =>
-        key.addEventListener('transitionend', removeTransition)
+        key.addEventListener("transitionend", removeTransition)
       );
-      window.addEventListener('keydown', playSound);
+      window.addEventListener("keydown", playSound);
     </script>
   </body>
 </html>
