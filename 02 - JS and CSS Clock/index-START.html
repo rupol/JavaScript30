@@ -5,7 +5,7 @@
     <title>JS + CSS Clock</title>
   </head>
   <body>
-    <video playsinline autoplay muted loop poster="polina.jpg" id="bgvid">
+    <video playsinline autoplay muted loop id="bgvid">
       <source
         src="video/coverr-natural-feeling-1558727149494.mp4"
         type="video/mp4"
@@ -17,6 +17,33 @@
         <div class="hand min-hand"></div>
         <div class="circle"></div>
         <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button onclick="hideElement(), naviconAnimate(this)">
+        <div class="navicon bar1"></div>
+        <div class="navicon bar2"></div>
+        <div class="navicon bar3"></div>
+      </button>
+      <div id="controls-content">
+        <div class="opacity">
+          <label for="opacity">Opacity:</label>
+          <input
+            id="opacity"
+            type="range"
+            name="opacity"
+            min="0"
+            max="1"
+            value=".65"
+            step=".1"
+          />
+        </div>
+
+        <div class="color">
+          <label for="base">Clock Color:</label>
+          <input id="base" type="color" name="base" value="#ffffff" />
+        </div>
       </div>
     </div>
 
@@ -104,6 +131,177 @@
         top: 0;
         left: 0;
       }
+
+      .controls {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        right: 0;
+        padding: 5px;
+        background: #00000088;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color: #ffffff;
+      }
+
+      /* CSS VARIABLES */
+      /* Nav Menu */
+      button {
+        border: 0;
+        padding: 0 20px;
+        background: none;
+        color: #ffffff;
+        font-size: 20px;
+        float: left;
+      }
+
+      .navicon {
+        width: 35px;
+        height: 5px;
+        background-color: black;
+        margin: 6px 0;
+        transition: 0.4s;
+      }
+
+      /* Rotate first bar */
+      .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+      }
+
+      /* Fade out the second bar */
+      .bar2 {
+        opacity: 0;
+      }
+
+      /* Rotate last bar */
+      .bar3 {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-8px, -8px);
+      }
+
+      /* Rotate first bar */
+      .change .bar1 {
+        -webkit-transform: rotate(0deg) translate(0, 0);
+        transform: rotate(0deg) translate(0, 0);
+      }
+
+      /* Fade out the second bar */
+      .change .bar2 {
+        opacity: 1;
+      }
+
+      /* Rotate last bar */
+      .change .bar3 {
+        -webkit-transform: rotate(0deg) translate(0, 0);
+        transform: rotate(0deg) translate(0, 0);
+      }
+
+      /* CSS Variables Functionality */
+      :root {
+        --base: rgba(255, 255, 255, 0.623);
+        --opacity: 0.65;
+      }
+
+      .clock,
+      .circle {
+        background: var(--base);
+      }
+
+      video {
+        opacity: var(--opacity);
+      }
+
+      /* Range Input Styling */
+      input[type="range"] {
+        -webkit-appearance: none;
+        width: 33%;
+        margin: 7.2px 0;
+      }
+      input[type="range"]:focus {
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-runnable-track {
+        width: 33%;
+        height: 3.6px;
+        cursor: pointer;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0),
+          0px 0px 0px rgba(13, 13, 13, 0);
+        background: rgba(255, 255, 255, 0.64);
+        border-radius: 25px;
+        border: 0px solid #010101;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        box-shadow: 0.9px 0.9px 2.8px #000000, 0px 0px 0.9px #0d0d0d;
+        border: 0.4px solid #000000;
+        height: 18px;
+        width: 18px;
+        border-radius: 50px;
+        background: #ffffff;
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -7.2px;
+      }
+      input[type="range"]:focus::-webkit-slider-runnable-track {
+        background: rgba(255, 255, 255, 0.64);
+      }
+      input[type="range"]::-moz-range-track {
+        width: 33%;
+        height: 3.6px;
+        cursor: pointer;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0),
+          0px 0px 0px rgba(13, 13, 13, 0);
+        background: rgba(255, 255, 255, 0.64);
+        border-radius: 25px;
+        border: 0px solid #010101;
+      }
+      input[type="range"]::-moz-range-thumb {
+        box-shadow: 0.9px 0.9px 2.8px #000000, 0px 0px 0.9px #0d0d0d;
+        border: 0.4px solid #000000;
+        height: 18px;
+        width: 18px;
+        border-radius: 50px;
+        background: #ffffff;
+        cursor: pointer;
+      }
+      input[type="range"]::-ms-track {
+        width: 33%;
+        height: 3.6px;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+      }
+      input[type="range"]::-ms-fill-lower {
+        background: rgba(235, 235, 235, 0.64);
+        border: 0px solid #010101;
+        border-radius: 50px;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0),
+          0px 0px 0px rgba(13, 13, 13, 0);
+      }
+      input[type="range"]::-ms-fill-upper {
+        background: rgba(255, 255, 255, 0.64);
+        border: 0px solid #010101;
+        border-radius: 50px;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0),
+          0px 0px 0px rgba(13, 13, 13, 0);
+      }
+      input[type="range"]::-ms-thumb {
+        box-shadow: 0.9px 0.9px 2.8px #000000, 0px 0px 0.9px #0d0d0d;
+        border: 0.4px solid #000000;
+        height: 18px;
+        width: 18px;
+        border-radius: 50px;
+        background: #ffffff;
+        cursor: pointer;
+        height: 3.6px;
+      }
+      input[type="range"]:focus::-ms-fill-lower {
+        background: rgba(255, 255, 255, 0.64);
+      }
+      input[type="range"]:focus::-ms-fill-upper {
+        background: rgba(255, 255, 255, 0.64);
+      }
     </style>
 
     <script>
@@ -127,6 +325,38 @@
         hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
       }
       setInterval(setDate, 1000);
+
+      // CSS Variables
+
+      const inputs = document.querySelectorAll(".controls input");
+
+      function handleUpdate() {
+        const suffix = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        );
+      }
+
+      inputs.forEach(input => input.addEventListener("change", handleUpdate));
+      inputs.forEach(input =>
+        input.addEventListener("mousemove", handleUpdate)
+      );
+
+      // Hide Variables Nav
+      function hideElement() {
+        const controlBox = document.getElementById("controls-content");
+        if (controlBox.style.display === "none") {
+          controlBox.style.display = "block";
+        } else {
+          controlBox.style.display = "none";
+        }
+      }
+
+      // Animate Navicon
+      function naviconAnimate(x) {
+        x.classList.toggle("change");
+      }
     </script>
   </body>
 </html>
